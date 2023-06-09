@@ -73,20 +73,28 @@ public:
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
+        // key is number, value is index.
         std::unordered_map<int, int> hash;
         for (int i = 0; i < nums.size(); ++i)
         {
-            int complement = target - nums[i];
-            if (hash.find(complement) != hash.end())
-            {
-                return {hash[complement], i};
-            }
-            else
+            // 1. Compute difference.
+            int diff = target - nums[i];
+            // 2. If difference is not found, add it to hash.
+            if (hash.find(diff) == hash.end())
             {
                 hash.insert({nums[i], i});
+            }
+            // 3. If the difference is found, then return the indicies.
+            else
+            {
+                return{hash[diff], i};
             }
         }
         return{0, 0};
     }
 };
+
+/**************************************************************************
+* The reason for diff to be the key so it can find the index that matches.*
+**************************************************************************/
 ```
